@@ -8,8 +8,8 @@ data_path = "dataset/"
 if not os.path.exists(data_path):
     os.mkdir(data_path)
 
-person_id = 1 # kalo mau run, ini IDnya ganti dulu
-count = 0 # kalo mau nambah, ini countnya jg diubah dulu ke penomoran terakhir
+person_id = 2 # kalo mau run, ini IDnya ganti dulu
+count = 100 # kalo mau nambah, ini countnya jg diubah dulu ke penomoran terakhir
 
 while True:
     _, frame = cap.read()
@@ -27,7 +27,7 @@ while True:
 
     if cv2.waitKey(1) == ord('q'):
         break
-    elif count == 500: # Set di 50 agar dataset lebih banyak
+    elif count == 200: # Set di 100 ga perlu terlalu banyak, model yg kita gunakan lebih ngaruh dengan variasi yang lebih banyak
         break
 
 cap.release()

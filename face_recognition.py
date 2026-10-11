@@ -1,7 +1,7 @@
 import cv2
 
 recognizer = cv2.face.LBPHFaceRecognizer.create()
-recognizer.read("rid-test-model.yml")
+recognizer.read("faces-model.yml")
 faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 font = cv2.FONT_HERSHEY_COMPLEX
 
