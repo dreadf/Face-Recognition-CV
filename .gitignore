@@ -1,5 +1,3 @@
-hand_skeleton.py
-opn.py
-haarcascade_frontalface_default.xml
-hand_landmarker.task
-rid-test-model.yml
+other/
+__pycache__/
+faces-model.yml
