@@ -20,16 +20,21 @@ for pid, files in files_by_id.items():
     test_files += [(f, pid) for f in files[:10]]
     train_files += [(f, pid) for f in files[10:]]
 
+def loadFace(fpath):
+    img = cv2.imread(fpath, cv2.IMREAD_GRAYSCALE)
+    img = cv2.equalizeHist(img)
+    return cv2.resize(img, (200,200))
+
 # Train modelnya
 recognizer = cv2.face.LBPHFaceRecognizer.create()
-train_faces = [cv2.imread(f, cv2.IMREAD_GRAYSCALE) for f, pid in train_files]
+train_faces = [loadFace(f) for f, pid in train_files]
 train_ids = np.array([pid for f, pid in train_files])
 recognizer.train(train_faces, train_ids)
 
 # Testing
 correct = 0
 for fpath, true_id in test_files:
-    face = cv2.imread(fpath, cv2.IMREAD_GRAYSCALE)
+    face = loadFace(fpath)
     pred_id, confidence = recognizer.predict(face)
     is_correct = (pred_id == true_id)
     correct += is_correct

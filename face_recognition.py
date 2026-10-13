@@ -16,7 +16,10 @@ while True:
     faces = faceCascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30,30))
 
     for (x,y,w,h) in faces:
-        id, confidence = recognizer.predict(gray[y:y+h, x:x+w])
+        # equalize and resize
+        face_img = cv2.equalizeHist(gray[y:y+h, x:x+w])
+        face_img = cv2.resize(face_img, (200,200))
+        id, confidence = recognizer.predict(face_img)
 
         if confidence < 100:
             color = colors[id]

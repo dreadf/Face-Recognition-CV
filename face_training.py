@@ -16,7 +16,10 @@ def organizeDataset(path="dataset/"):
         id = int(os.path.split(i)[-1].split("-")[1])
         face = faceCascade.detectMultiScale(img)
         for (x, y, w, h) in face:
-            faces.append(img[y:y+h, x:x+w])
+            #Resize and equalize brightness
+            face_img = cv2.equalizeHist(img[y:y+h, x:x+w])
+            face_img = cv2.resize(face_img, (200,200))
+            faces.append(face_img)
             ids = np.append(ids, id)
     return faces, ids
 
