@@ -26,10 +26,13 @@ while True:
             id = 'unknown'
             
         cv2.rectangle(frame, (x,y), (x+w, y+h), color, 2)
-        confident = '{}%'.format(round(100-confidence))
+        # confidence dari LBPH itu jarak (distance): 0 = cocok banget, makin besar makin jelek.
+        # Kita balik jadi persentase, jarak 0 -> 100%, jarak >=100 -> 0%.
+        match_percent = max(0, round(100 - confidence))
+        confident = '{}%'.format(match_percent)
 
         cv2.putText(frame, str(id), (x+5, y-5), font, 1, color, 1)
-        cv2.putText(frame, str(confidence), (x+5, y+h-5), font, 1, (255,255,0), 1)
+        cv2.putText(frame, confident, (x+5, y+h-5), font, 1, (255,255,0), 1)
 
     cv2.imshow("Camera", frame)
     if cv2.waitKey(1) == ord('q'):
